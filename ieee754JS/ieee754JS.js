@@ -31,9 +31,15 @@ function FloatToIEEE(f)
     return (new Uint32Array(buf))[0];
 }
 function draw() {
-    background(255);
+    background(255,255,191);
+    if (mouseIsPressed && (mouseY < 50 || mouseY > 90)) {
+        // 提示使用者可按中間
+        fill(128, 128);
+        noStroke();
+        rect(0, 0, windowWidth, height);
+    }
     textAlign(CENTER, CENTER);
-    textSize(12);
+    textSize(20);
     stroke(128);
     strokeWeight(1);
     for (var i = 0; i < 32; i++) {
@@ -44,23 +50,23 @@ function draw() {
         else
             fill(255, 173, 173);
         //stroke(0);
-        rect(i * 20, 50, 20, 40);
+        rect(10 + i * 30, 50, 30, 50);
         fill(0);
-        text(bit[31 - i], i * 20 + 20 / 2, 50 + 40 / 2);
+        text(bit[31 - i], 10 + i * 30 + 30 / 2, 50 + 50 / 2);
     // LSB: Least Significant Bit, LSB 最小位在最右邊,又 x86 是 Little Endian
     }
     textAlign(CENTER, BOTTOM);
     fill(0);
-    text("sign", (1 + 0) * 20 / 2, 50);
-    text("exponent (8 bits)", (9 + 1) * 20 / 2, 50);
-    text("fraction (23 bits)", (32 + 9) * 20 / 2, 50);
-    text("31", (1 + 0) * 20 / 2, 50 + 40 + 20);
-    text("30", (2 + 1) * 20 / 2, 50 + 40 + 20);
-    text("23", (9 + 8) * 20 / 2, 50 + 40 + 20);
-    text("22", (10 + 9) * 20 / 2, 50 + 40 + 20);
-    text("0", (32 + 31) * 20 / 2, 50 + 40 + 20);
+    text("sign", 10 + (1 + 0) * 30 / 2, 50);
+    text("exponent (8 bits)", 10 + (9 + 1) * 30 / 2, 50);
+    text("fraction (23 bits)", 10 + (32 + 9) * 30 / 2, 50);
+    text("31", 10 + (1 + 0) * 30 / 2, 50 + 50 + 25);
+    text("30", 10 + (2 + 1) * 30 / 2, 50 + 50 + 25);
+    text("23", 10 + (9 + 8) * 30 / 2, 50 + 50 + 25);
+    text("22", 10 + (10 + 9) * 30 / 2, 50 + 50 + 25);
+    text("0", 10 + (32 + 31) * 30 / 2, 50 + 50 + 25);
     textAlign(LEFT, TOP);
-    textSize(20);
+    textSize(24);
     text("Step 1: sign part [" + bit[31] + "] is " + ((bit[31] == 0) ? "positive" : "negtive"), 10, 150);
     var step2 = bitInt(30, 23);
     text("Step 2: exp part [" + bitString(30, 23) + "] is " + step2, 10, 200);
@@ -73,20 +79,12 @@ function draw() {
     }
     let step4 = "Step 4: mantissa part [" + bitString(22, last) + "] is \n" + mentissaString(last);
     text(step4, 10, 300, windowWidth - 10, 200);
-    let step4Height = textWidth(step4)/(windowWidth-10)*20;
+    let step4Height = int(textWidth(mentissaString(last))/(windowWidth-10))*40;
     var step5 = (mentissa + 1);
-    text("Step 5: add 1 to mantissa is " + step5, 10, 350+step4Height);
+    text("Step 5: add 1 to mantissa is " + step5, 10, 400+step4Height);
     let sign = (bit[31]==1)? "-" : "";
-    text("Step 6: result is " + sign + step5 + " * 2^" + (bitInt(30, 23) - 127) + " = " + sign + (step5 * pow(2, step3)), 10, 400+step4Height);
+    text("Step 6: result is " + sign + step5 + " * 2^" + (bitInt(30, 23) - 127) + " = " + sign + (step5 * pow(2, step3)), 10, 450+step4Height);
   
-    if (mouseIsPressed && (mouseY < 50 || mouseY > 90)) {
-        // 提示可以按中間
-        fill(128, 128);
-        noStroke();
-        rect(0, 0, width, 50);
-        rect(0, 90, width, height - 90);
-        rect(640, 50, width-640, 40);
-    }
 }
 
 function bitString(a, b) {
@@ -124,8 +122,8 @@ function mentissaString(last) {
 }
 
 function mousePressed() {
-    if (mouseY > 50 && mouseY < 90) {
-        var i = int(mouseX / 20);
+    if (mouseY > 50 && mouseY < 100) {
+        var i = int( (mouseX-10) / 30);
         if (i > 31 || i < 0)
             return;
         bit[31 - i] = 1 - bit[31 - i];
