@@ -1,12 +1,13 @@
-# IEEE 754 Vis
+# IEEE 754 視覺化講解
 為了回覆網友的問題, 我寫了這個專案, 可以將 IEEE 754 Visualization 視覺化呈現。
 
 作者: 葉正聖 jsyeh@mail.mcu.edu.tw
 
 ## p5.js 範例
 
-[IEEE 754 用滑鼠互動](https://jsyeh.org/ieee754/ieee754JS/)
-(可用 mouse 點擊 bits 學習 IEEE 754)
+[互動網頁示範](https://jsyeh.org/ieee754/ieee754JS/)
+
+[![og-facebook.png](ieee754JS/og-facebook.png)](https://jsyeh.org/ieee754/ieee754JS/)
 
 ## Processing 範例
 ![ieee754 sample 58.5](ieee754/ieee754.png)
@@ -28,6 +29,7 @@ void setup() {
     bit[i] = (N>>i) & 0x01;
   }
 }
+
 void draw() {
   background(255);
   textAlign(CENTER, CENTER);
@@ -66,18 +68,16 @@ void draw() {
   text("Step 4: mantissa part [" + bitString(22,last) + "] is \n" + mentissaString(last), 10, 300, width-10,200);
   float step5=(mentissa+1);
   text("Step 5: add 1 to mantissa is " + step5, 10, 400);
-  text("Step 6: result is " +  step5 + " * 2^"+(bitInt(30,23)-127) + " = " + (step5*pow(2,step3)), 10, 450);
-  if( mousePressed && (mouseY<50 || mouseY>90) ){//提示可以按中間
-    fill(128,128); rect(0,0,width,50);
-    fill(128,128); rect(0,90, width,height-90);
-  }
-
+  String sign = (bit[31]==1)? "-" : "";
+  text("Step 6: result is " +  sign + step5 + " * 2^"+(bitInt(30,23)-127) + " = " + sign + (step5*pow(2,step3)), 10, 450);
 }
+
 String bitString(int a, int b){
   String ans = "";
   for(int i=a; i>=b; i--) ans+= bit[i];
   return ans;
 }
+
 int bitInt(int a, int b){
   int ans = 0;
   for(int i=a; i>=b; i--){
@@ -86,6 +86,7 @@ int bitInt(int a, int b){
   }
   return ans;
 }
+
 float mentissa=0;
 float mentissaHeight=0;
 String mentissaString(int last){
