@@ -73,10 +73,11 @@ function draw() {
     }
     let step4 = "Step 4: mantissa part [" + bitString(22, last) + "] is \n" + mentissaString(last);
     text(step4, 10, 300, windowWidth - 10, 200);
-    let step4Height = textWidth(step4)/(windowWidth-10)*25;
+    let step4Height = textWidth(step4)/(windowWidth-10)*20;
     var step5 = (mentissa + 1);
     text("Step 5: add 1 to mantissa is " + step5, 10, 350+step4Height);
-    text("Step 6: result is " + step5 + " * 2^" + (bitInt(30, 23) - 127) + " = " + (step5 * pow(2, step3)), 10, 400+step4Height);
+    let sign = (bit[31]==1)? "-" : "";
+    text("Step 6: result is " + sign + step5 + " * 2^" + (bitInt(30, 23) - 127) + " = " + sign + (step5 * pow(2, step3)), 10, 400+step4Height);
   
     if (mouseIsPressed && (mouseY < 50 || mouseY > 90)) {
         // 提示可以按中間

@@ -52,7 +52,8 @@ void draw() {
   text("Step 4: mantissa part [" + bitString(22,last) + "] is \n" + mentissaString(last), 10, 300, width-10,200);
   float step5=(mentissa+1);
   text("Step 5: add 1 to mantissa is " + step5, 10, 400);
-  text("Step 6: result is " +  step5 + " * 2^"+(bitInt(30,23)-127) + " = " + (step5*pow(2,step3)), 10, 450);
+  String sign = (bit[31]==1)? "-" : "";
+  text("Step 6: result is " +  sign + step5 + " * 2^"+(bitInt(30,23)-127) + " = " + sign + (step5*pow(2,step3)), 10, 450);
   if( mousePressed && (mouseY<50 || mouseY>90) ){//提示可以按中間
     fill(128,128); rect(0,0,width,50);
     fill(128,128); rect(0,90, width,height-90);
