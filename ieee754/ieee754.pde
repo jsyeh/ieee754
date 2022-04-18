@@ -1,9 +1,3 @@
-# ieee754
-IEEE 754 Visualization
-
-![ieee754 sample 58.5](ieee754/ieee754.png)
-
-```processing
 //有網友遇到 IEEE 754 計算的問題, 所以我想把它畫出來, 方便理解
 //參考資料 https://en.wikipedia.org/wiki/IEEE_754
 //可以產生最大值、最小值。秀出2個float的加減乘除等
@@ -101,4 +95,3 @@ void mousePressed(){
     bit[31-i] = 1 - bit[31-i];
   }
 }
-```
