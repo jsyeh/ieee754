@@ -1,6 +1,14 @@
-# ieee754
-IEEE 754 Visualization
+# IEEE 754 Vis
+為了回覆網友的問題, 我寫了這個專案, 可以將 IEEE 754 Visualization 視覺化呈現。
 
+作者: 葉正聖 jsyeh@mail.mcu.edu.tw
+
+## p5.js 範例
+
+[互動網頁示範](https://jsyeh.org/ieee754/ieee754JS/)
+
+
+## Processing 範例
 ![ieee754 sample 58.5](ieee754/ieee754.png)
 
 ```processing
