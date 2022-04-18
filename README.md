@@ -5,8 +5,8 @@
 
 ## p5.js 範例
 
-[互動網頁示範](https://jsyeh.org/ieee754/ieee754JS/)
-
+[IEEE 754 用滑鼠互動](https://jsyeh.org/ieee754/ieee754JS/)
+(可用 mouse 點擊 bits 學習 IEEE 754)
 
 ## Processing 範例
 ![ieee754 sample 58.5](ieee754/ieee754.png)
